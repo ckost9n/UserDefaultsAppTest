@@ -19,7 +19,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        user = StorageManager.shared.getUser()
+        user = StorageManager.shared.getUserFromFile()
+//        user = StorageManager.shared.getUser()
         userNameLabel.text = user.name + " " + user.surname
         
     }
@@ -45,7 +46,8 @@ class ViewController: UIViewController {
             userNameLabel.text = firstName + " " + secondName
             user.name = firstName
             user.surname = secondName
-            StorageManager.shared.saveUser(user)
+//            StorageManager.shared.saveUser(user)
+            StorageManager.shared.saveUserToFile(user)
         }
         
         firstTextLabel.text = nil
