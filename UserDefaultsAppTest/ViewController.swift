@@ -14,15 +14,13 @@ class ViewController: UIViewController {
     @IBOutlet var firstTextLabel: UITextField!
     @IBOutlet var secondTextField: UITextField!
     
+    private var user = User()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        userNameLabel.isHidden = true
         
-        if let userName = UserDefaults.standard.value(forKey: "userName")  {
-            userNameLabel.isHidden = false
-            userNameLabel.text = userName as? String
-        }
-        
+        user = StorageManager.shared.getUser()
+        userNameLabel.text = user.name + " " + user.surname
         
     }
 
@@ -45,7 +43,9 @@ class ViewController: UIViewController {
             
             userNameLabel.isHidden = false
             userNameLabel.text = firstName + " " + secondName
-            UserDefaults.standard.setValue(userNameLabel.text, forKey: "userName")
+            user.name = firstName
+            user.surname = secondName
+            StorageManager.shared.saveUser(user)
         }
         
         firstTextLabel.text = nil
